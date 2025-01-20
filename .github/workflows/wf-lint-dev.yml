@@ -1,0 +1,24 @@
+name: wf--dev-lint
+on:
+  pull_request:
+    branches:
+      - develop
+jobs:
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Lint HTML and CSS linters
+        run: |
+          npx htmlhint "**/*.html"
+          npx stylelint "**/*.css"
+  build-job:
+    needs: lint-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build with Parcel
+        run: | 
+          npx parcel build "./src/index.html" --dist-dir "./dev" --public-url "./dev"
