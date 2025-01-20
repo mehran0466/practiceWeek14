@@ -1,5 +1,5 @@
 {
     "rules": {
-        "selectoe-type-case": "lower"
+        "selector-type-case": "lower"
     }
 }
